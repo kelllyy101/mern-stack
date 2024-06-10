@@ -1,6 +1,7 @@
 require('dotenv').config() //attach env varibale to process object
 
 const express = require('express')
+const workoutRoutes = require('./routes/workouts')
 
 //express app
 const app = express();
@@ -12,14 +13,10 @@ app.use((req, res, next) => {
 })
 
 //routes
-//function 2nd arg to handle request
-app.get('/', (req, res) =>{
-    res.json({mssg:'Welcome to app'})
-})
+app.use('/api/workouts', workoutRoutes)
 
 //listen for requests
 app.listen(process.env.PORT, () => {
-    console.log('listening on port 4000')
+    console.log('listening on port 4000', process.env.PORT)
 })
 
-process.env
