@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const WorkoutForm = () => {
+    const { dispatch } = useWorkoutsContext();
     const [title, setTitle] = useState('');
     const [weight, setWeight] = useState('');
     const [reps, setReps] = useState('');
@@ -29,6 +31,7 @@ const WorkoutForm = () => {
             setWeight('')
             setError(null)
             console.log('new workout added', json)
+            dispatch({type: 'CREATE_WORKOUT', payload: json}) //adding to global context state
         }
     };
 
@@ -55,6 +58,7 @@ const WorkoutForm = () => {
                 value={reps}
             />
             <button>Add Workout</button>
+            {error && <div className="error">{error}</div>}
         </form>
     )
 };
