@@ -13,7 +13,7 @@ const getWorkout = async (req, res) => {
     const { id } = req.params //grabs id from router params
 
     if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such workout'})
+        return res.status(404).json({error: 'Id is not valid'})
     }
 
     const workout = await Workout.findById(id)
@@ -28,6 +28,7 @@ const getWorkout = async (req, res) => {
 
 //create new workout
 const createWorkout = async (req, res) => {
+
     const {title, reps, weight} = req.body
 
     let emptyFields = []
